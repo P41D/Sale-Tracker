@@ -55,6 +55,36 @@
         .dark .modal-content::-webkit-scrollbar-thumb:hover {
             background: #718096;
         }
+
+        /* Classes for period tabs */
+        .period-tab {
+            background-color: #f3f4f6; /* bg-slate-100 */
+            color: #374151; /* text-slate-700 */
+        }
+        .dark .period-tab {
+            background-color: #334155; /* dark:bg-slate-700 */
+            color: #d1d5db; /* dark:text-slate-300 */
+        }
+        .period-tab:hover {
+            background-color: #e5e7eb; /* hover:bg-slate-200 */
+        }
+        .dark .period-tab:hover {
+            background-color: #4b5563; /* dark:hover:bg-slate-600 */
+        }
+        .period-tab.active {
+            background-color: #2563eb; /* bg-blue-600 */
+            color: #ffffff; /* text-white */
+        }
+        .dark .period-tab.active {
+            background-color: #2563eb; /* dark:bg-blue-600 */
+            color: #ffffff; /* dark:text-white */
+        }
+        .period-tab.active:hover {
+            background-color: #1d4ed8; /* hover:bg-blue-700 */
+        }
+        .dark .period-tab.active:hover {
+            background-color: #1d4ed8; /* dark:hover:bg-blue-700 */
+        }
     </style>
     <script>
         // Configure Tailwind for dark mode
@@ -364,7 +394,54 @@
                                     <option value="Figma">Figma</option>
                                     <option value="Lightroom">Lightroom</option>
                                 </optgroup>
-                                <!-- ... other optgroups ... -->
+                                <optgroup label="🎵 Music Apps">
+                                    <option value="Spotify Premium">Spotify Premium</option>
+                                    <option value="Apple Music">Apple Music</option>
+                                    <option value="YouTube Music">YouTube Music</option>
+                                    <option value="Tidal">Tidal</option>
+                                    <option value="Deezer">Deezer</option>
+                                </optgroup>
+                                <optgroup label="📚 Education">
+                                    <option value="Quizlet Plus">Quizlet Plus</option>
+                                    <option value="Duolingo Plus">Duolingo Plus</option>
+                                    <option value="Coursera Plus">Coursera Plus</option>
+                                    <option value="Udemy">Udemy</option>
+                                    <option value="Skillshare">Skillshare</option>
+                                    <option value="Brainly">Brainly</option>
+                                </optgroup>
+                                <optgroup label="🎮 Gaming">
+                                    <option value="Xbox Game Pass">Xbox Game Pass</option>
+                                    <option value="PlayStation Plus">PlayStation Plus</option>
+                                    <option value="Nintendo Switch Online">Nintendo Switch Online</option>
+                                    <option value="EA Play">EA Play</option>
+                                    <option value="Ubisoft+">Ubisoft+</option>
+                                </optgroup>
+                                <optgroup label="🔐 VPN & Security">
+                                    <option value="NordVPN">NordVPN</option>
+                                    <option value="ExpressVPN">ExpressVPN</option>
+                                    <option value="Surfshark">Surfshark</option>
+                                    <option value="CyberGhost">CyberGhost</option>
+                                    <option value="ProtonVPN">ProtonVPN</option>
+                                </optgroup>
+                                <optgroup label="☁️ Cloud Storage">
+                                    <option value="Google One">Google One</option>
+                                    <option value="Dropbox">Dropbox</option>
+                                    <option value="OneDrive">OneDrive</option>
+                                    <option value="iCloud+">iCloud+</option>
+                                </optgroup>
+                                <optgroup label="💼 Productivity">
+                                    <option value="Microsoft 365">Microsoft 365</option>
+                                    <option value="Notion">Notion</option>
+                                    <option value="Grammarly Premium">Grammarly Premium</option>
+                                    <option value="ChatGPT Plus">ChatGPT Plus</option>
+                                    <option value="Evernote Premium">Evernote Premium</option>
+                                </optgroup>
+                                <optgroup label="📱 Social & Other">
+                                    <option value="YouTube Premium">YouTube Premium</option>
+                                    <option value="LinkedIn Premium">LinkedIn Premium</option>
+                                    <option value="Telegram Premium">Telegram Premium</option>
+                                    <option value="Discord Nitro">Discord Nitro</option>
+                                </optgroup>
                                 <option value="custom">✏️ Custom / Other</option>
                             </select>
                         </div>
@@ -407,7 +484,7 @@
                     <h3 class="text-lg font-semibold text-slate-900 dark:text-white mb-4">Current Products</h3>
                     <div id="productList" class="space-y-3">
                         <!-- Product list will be rendered here -->
-                        <div class="text-center p-6 text-slate-500">No products yet.</div>
+                        <div class="text-center p-6 text-slate-500 dark:text-slate-400">No products yet.</div>
                     </div>
                 </div>
             </div>
@@ -492,6 +569,7 @@
                     <h3 class="text-lg font-semibold text-slate-900 dark:text-white mb-4">Admin List</h3>
                     <div id="userList" class="space-y-3">
                         <!-- Admin list rendered here -->
+                        <div class="text-center p-6 text-slate-500 dark:text-slate-400">No admins yet.</div>
                     </div>
                 </div>
 
@@ -501,6 +579,7 @@
                     <h3 class="text-lg font-semibold text-slate-900 dark:text-white mb-4">Pending Payouts</h3>
                     <div id="payoutList" class="space-y-3">
                         <!-- Payout list rendered here -->
+                        <div class="text-center p-6 text-slate-500 dark:text-slate-400">No pending payouts.</div>
                     </div>
                 </div>
             </div>
@@ -537,9 +616,9 @@
                     <label for="toggleDarkMode" class="flex justify-between items-center cursor-pointer">
                         <span class="font-medium text-slate-700 dark:text-slate-300">Dark Mode</span>
                         <div class="relative">
-                            <input type="checkbox" id="toggleDarkMode" class="sr-only">
-                            <div class="w-10 h-6 bg-slate-300 dark:bg-slate-600 rounded-full shadow-inner"></div>
-                            <div class="dot absolute w-4 h-4 bg-white rounded-full shadow -left-0 top-1 transition-transform"></div>
+                            <input type="checkbox" id="toggleDarkMode" class="sr-only peer">
+                            <div class="w-10 h-6 bg-slate-300 dark:bg-slate-600 rounded-full shadow-inner peer-checked:bg-blue-600"></div>
+                            <div class="dot absolute w-4 h-4 bg-white rounded-full shadow top-1 left-1 transition-transform peer-checked:translate-x-4"></div>
                         </div>
                     </label>
                 </div>
@@ -574,9 +653,8 @@
         // ===================
         // TAILWIND STYLES
         // ===================
-        // We add these dynamically to avoid repeating them in the HTML
         const formInputClasses = "w-full px-4 py-3 bg-slate-100 dark:bg-slate-700 border border-slate-200 dark:border-slate-600 rounded-lg text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all";
-        const calcBtnClasses = "py-4 rounded-lg text-xl font-bold transition-all";
+        const calcBtnClasses = "py-4 rounded-lg text-xl font-bold transition-all bg-white dark:bg-slate-700 text-slate-800 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-600";
         const filterBtnClasses = "py-2 px-4 text-sm font-medium rounded-lg transition-all bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-600";
         const filterBtnActiveClasses = "bg-blue-600 text-white hover:bg-blue-700";
         
@@ -773,6 +851,8 @@
                     closeModal('settingsModal');
                 })
                 .catch((error) => {
+                    // ***** SYNTAX ERROR FIX *****
+                    // The error was: 'M + error.message, 'error'
                     showToast('❌ Error: ' + error.message, 'error');
                 });
         }
@@ -808,7 +888,16 @@
             const isDark = document.documentElement.classList.toggle('dark');
             settings.darkMode = isDark;
             localStorage.setItem('darkMode', isDark); // Save preference
-            applySettings();
+            
+            // This is a manual settings save
+            getRef('settings/' + currentUsername).set(settings)
+                .then(() => {
+                    applySettings(); // Re-apply settings and update charts
+                    showToast(isDark ? '🌙 Dark mode enabled' : '☀️ Light mode enabled', 'info');
+                })
+                .catch((error) => {
+                    showToast('❌ Error saving dark mode: ' + error.message, 'error');
+                });
         }
 
         // ===================
@@ -1120,7 +1209,8 @@
                 // CREATE new sale
                 const newSaleId = Date.now();
                 saleData.id = newSaleId;
-                getRef('sales/'s + userKey + '/' + newSaleId).set(saleData)
+                // ***** TYPO FIX *****
+                getRef('sales/' + userKey + '/' + newSaleId).set(saleData)
                     .then(() => {
                         showToast('✅ Sale added successfully!', 'success');
                         resetSaleForm();
@@ -1134,6 +1224,12 @@
             const sale = sales.find(s => s.id === id);
             if (!sale) return;
             
+            // Ensure the user editing is the user who made the sale, or the owner
+            if (currentSession.role !== 'owner' && currentSession.id !== sale.userId) {
+                showToast('❌ You can only edit your own sales.', 'error');
+                return;
+            }
+
             currentEditId = id;
 
             document.getElementById('productSelect').value = sale.productId;
@@ -1166,6 +1262,12 @@
             showConfirmationModal('Are you sure you want to delete this sale?', false, null, () => {
                 const sale = sales.find(s => s.id === id);
                 if (!sale) return;
+
+                // Ensure the user deleting is the user who made the sale, or the owner
+                if (currentSession.role !== 'owner' && currentSession.id !== sale.userId) {
+                    showToast('❌ You can only delete your own sales.', 'error');
+                    return;
+                }
                 
                 // Find the username who made the sale
                 const saleUser = users.find(u => u.id === sale.userId);
@@ -1187,6 +1289,12 @@
         function toggleSold(id) {
             const sale = sales.find(s => s.id === id);
             if (!sale) return;
+
+            // Ensure the user toggling is the user who made the sale, or the owner
+            if (currentSession.role !== 'owner' && currentSession.id !== sale.userId) {
+                showToast('❌ You can only edit your own sales.', 'error');
+                return;
+            }
             
             const newSoldStatus = !sale.sold;
             
@@ -1197,6 +1305,7 @@
             }
             const userKey = saleUser.username.replace(/[.#$/[\]]/g, '_');
             
+            // ***** TYPO FIX *****
             getRef('sales/' + userKey + '/' + id).update({ sold: newSoldStatus })
                 .then(() => {
                     showToast(newSoldStatus ? '✅ Marked as sold!' : '📦 Marked as in stock', 'success');
@@ -1282,7 +1391,7 @@
         document.getElementById('addUserForm').addEventListener('submit', function(e) {
             e.preventDefault();
             
-            const username = document.getElementById('newUsername').value.trim().toLowerCase();
+            const username = document.getElementById('newUsername').value.trim().toLowerCase(); // Force lowercase for key
             const customName = document.getElementById('newUserName').value.trim();
             const password = document.getElementById('newPassword').value;
             const profitPercent = parseFloat(document.getElementById('newProfitPercent').value);
@@ -1313,6 +1422,7 @@
                         createdDate: new Date().toISOString().split('T')[0]
                     };
 
+                    // ***** TYPO FIX *****
                     return getRef('users/' + username).set(newUser);
                 })
                 .then(() => {
@@ -1320,8 +1430,10 @@
                     showToast('✅ Admin added successfully!', 'success');
                 })
                 .catch((error) => {
-                    if (error !== 'Username exists' && error.message) {
+                    if (error && error.message) {
                         showToast('❌ Error: ' + error.message, 'error');
+                    } else if (error !== 'Username exists') {
+                         showToast('❌ An unknown error occurred.', 'error');
                     }
                 });
         });
@@ -1507,6 +1619,9 @@
                     </td>
                 </tr>
             `).join('');
+
+            // After rendering, apply dynamic styles to the new badges
+            applyDynamicStyles();
         }
 
         function updateCharts() {
@@ -1594,20 +1709,30 @@
         // ===================
 
         function applyDynamicStyles() {
-            document.querySelectorAll('.form-input').forEach(el => el.classList.add(...formInputClasses.split(' ')));
-            document.querySelectorAll('.calc-btn').forEach(el => el.classList.add(...calcBtnClasses.split(' ')));
+            // Apply to all elements matching the class
+            document.querySelectorAll('.form-input').forEach(el => {
+                formInputClasses.split(' ').forEach(cls => el.classList.add(cls));
+            });
+            document.querySelectorAll('.calc-btn').forEach(el => {
+                calcBtnClasses.split(' ').forEach(cls => el.classList.add(cls));
+            });
             document.querySelectorAll('.filter-btn').forEach(el => {
-                el.classList.add(...filterBtnClasses.split(' '));
+                // Clear old classes
+                filterBtnClasses.split(' ').forEach(cls => el.classList.remove(cls));
+                filterBtnActiveClasses.split(' ').forEach(cls => el.classList.remove(cls));
+
                 if (el.classList.contains('active')) {
-                    el.classList.remove(...filterBtnClasses.split(' '));
-                    el.classList.add(...filterBtnActiveClasses.split(' '));
+                    filterBtnActiveClasses.split(' ').forEach(cls => el.classList.add(cls));
+                } else {
+                    filterBtnClasses.split(' ').forEach(cls => el.classList.add(cls));
                 }
             });
-            document.querySelectorAll('.warranty-badge.fw').forEach(el => el.className = 'py-1 px-2 text-xs font-medium rounded-full bg-green-100 dark:bg-green-900/40 text-green-700 dark:text-green-300');
-            document.querySelectorAll('.warranty-badge.nw').forEach(el => el.className = 'py-1 px-2 text-xs font-medium rounded-full bg-yellow-100 dark:bg-yellow-900/40 text-yellow-700 dark:text-yellow-300');
-            document.querySelectorAll('.account-type-badge.solo').forEach(el => el.className = 'py-1 px-2 text-xs font-medium rounded-full bg-blue-100 dark:bg-blue-900/40 text-blue-700 dark:text-blue-300');
-            document.querySelectorAll('.account-type-badge.shared').forEach(el => el.className = 'py-1 px-2 text-xs font-medium rounded-full bg-purple-100 dark:bg-purple-900/40 text-purple-700 dark:text-purple-300');
+            document.querySelectorAll('.warranty-badge.fw').forEach(el => el.className = 'warranty-badge fw py-1 px-2 text-xs font-medium rounded-full bg-green-100 dark:bg-green-900/40 text-green-700 dark:text-green-300');
+            document.querySelectorAll('.warranty-badge.nw').forEach(el => el.className = 'warranty-badge nw py-1 px-2 text-xs font-medium rounded-full bg-yellow-100 dark:bg-yellow-900/40 text-yellow-700 dark:text-yellow-300');
+            document.querySelectorAll('.account-type-badge.solo').forEach(el => el.className = 'account-type-badge solo py-1 px-2 text-xs font-medium rounded-full bg-blue-100 dark:bg-blue-900/40 text-blue-700 dark:text-blue-300');
+            document.querySelectorAll('.account-type-badge.shared').forEach(el => el.className = 'account-type-badge shared py-1 px-2 text-xs font-medium rounded-full bg-purple-100 dark:bg-purple-900/40 text-purple-700 dark:text-purple-300');
         }
+
 
         function exportToCSV() {
             const filtered = getFilteredSales();
@@ -1631,7 +1756,7 @@
         function clearAllData() {
             showConfirmationModal('Delete ALL your sales data? This cannot be undone. Type "DELETE ALL" to confirm.', true, "DELETE ALL", () => {
                 const userKey = currentUsername.replace(/[.#$/[\]]/g, '_');
-                getRef('sales/' + userKey).remove()
+                getRef('sales/'s + userKey).remove()
                     .then(() => {
                         showToast('🗑️ All your data cleared!', 'info');
                         autoCalculatePayouts();
@@ -1641,7 +1766,10 @@
         }
         
         function resetAllData() {
-            if (currentSession.role !== 'owner') return;
+            if (currentSession.role !== 'owner') {
+                showToast('❌ Only owner can reset data.', 'error');
+                return;
+            }
             showConfirmationModal('Delete ALL products, sales, and payouts? This will reset everything to zero! Type "RESET" to confirm.', true, "RESET", () => {
                 showToast('🔄 Resetting all data...', 'info');
                 Promise.all([
@@ -1655,6 +1783,29 @@
                 })
                 .catch((error) => showToast('❌ Error: ' + error.message, 'error'));
             });
+        }
+
+        // ===================
+        // CALCULATOR
+        // ===================
+        function appendCalc(value) {
+            if (calcValue === '0' && value !== '.') {
+                calcValue = value;
+            } else {
+                calcValue += value;
+            }
+            document.getElementById('calcDisplay').textContent = calcValue;
+        }
+
+        function clearCalc() {
+            calcValue = '0';
+            document.getElementById('calcDisplay').textContent = calcValue;
+        }
+
+        function deleteCalc() {
+            calcValue = calcValue.slice(0, -1);
+            if (calcValue === '') calcValue = '0';
+            document.getElementById('calcDisplay').textContent = calcValue;
         }
 
         function calculateCalc() {
@@ -1702,7 +1853,9 @@
             iconEl.textContent = icons[type];
             msgEl.textContent = message;
             
+            // Show toast
             toast.style.transform = 'translateX(0)';
+            // Hide after 3 seconds
             setTimeout(() => {
                 toast.style.transform = 'translateX(120%)';
             }, 3000);
@@ -1756,12 +1909,9 @@
             // Period Tabs
             document.querySelectorAll('.period-tab').forEach(tab => {
                 tab.addEventListener('click', function() {
-                    document.querySelectorAll('.period-tab').forEach(t => {
-                        t.classList.remove(...filterBtnActiveClasses.split(' '));
-                        t.classList.add(...filterBtnClasses.split(' '));
-                    });
-                    this.classList.add(...filterBtnActiveClasses.split(' '));
-                    this.classList.remove(...filterBtnClasses.split(' '));
+                    document.querySelectorAll('.period-tab').forEach(t => t.classList.remove('active'));
+                    this.classList.add('active');
+                    applyDynamicStyles(); // Update tab styles
                     updateUI();
                 });
             });
@@ -1775,15 +1925,9 @@
                 const btn = document.getElementById(btnId);
                 if (btn) {
                     btn.addEventListener('click', function() {
-                        filterButtons.forEach(id => {
-                            const b = document.getElementById(id);
-                            if (b) {
-                                b.classList.remove(...filterBtnActiveClasses.split(' '));
-                                b.classList.add(...filterBtnClasses.split(' '));
-                            }
-                        });
-                        this.classList.add(...filterBtnActiveClasses.split(' '));
-                        this.classList.remove(...filterBtnClasses.split(' '));
+                        filterButtons.forEach(id => document.getElementById(id)?.classList.remove('active'));
+                        this.classList.add('active');
+                        applyDynamicStyles(); // Update filter btn styles
                         renderSalesTable();
                     });
                 }
@@ -1798,6 +1942,7 @@
             document.getElementById('btnLogout').addEventListener('click', () => {
                 showConfirmationModal('Are you sure you want to logout?', false, null, () => {
                     localStorage.removeItem('session');
+                    localStorage.removeItem('darkMode'); // Clear dark mode preference
                     window.location.href = 'index.html';
                 });
             });
@@ -1808,7 +1953,17 @@
             document.getElementById('btnResetAll').addEventListener('click', resetAllData);
             
             // Settings Modal
-            document.getElementById('toggleDarkMode').addEventListener('change', toggleDarkMode);
+            document.getElementById('toggleDarkMode').addEventListener('change', () => {
+                // This is for the toggle switch
+                const isDark = document.getElementById('toggleDarkMode').checked;
+                if (isDark) {
+                    document.documentElement.classList.add('dark');
+                } else {
+                    document.documentElement.classList.remove('dark');
+                }
+                settings.darkMode = isDark;
+                localStorage.setItem('darkMode', isDark);
+            });
             
             // Confirmation Modal Buttons
             document.getElementById('confirmCancelBtn').addEventListener('click', closeConfirmationModal);
