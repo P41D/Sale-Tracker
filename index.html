@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sales Tracker - Login</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;4Two;600;700;800&family=Dancing+Script:wght@400;700&display=swap" rel="stylesheet">
+    
+    <!-- Firebase SDKs -->
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #8B5CF6;
+            --primary-dark: #7C3AED;
+            --secondary: #EC4899;
+            --success: #10B981;
+            --danger: #EF4444;
+            --light: #F3E8FF;
+            --card-bg: #ffffff;
+            --border-color: #E9D5FF;
+            --gradient-pink: linear-gradient(135deg, #EC4899 0%, #8B5CF6 100%);
+            --shadow-lg: 0 10px 40px rgba(139, 92, 246, 0.3);
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            --font-family: 'Poppins', sans-serif;
+            --font-heading: 'Dancing Script', cursive;
+        }
+
+        body {
+            font-family: var(--font-family);
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .login-card {
+            background: var(--card-bg);
+            border-radius: 35px;
+            padding: 40px 50px;
+            max-width: 450px;
+            width: 100%;
+            box-shadow: var(--shadow-lg);
+            border: 4px solid var(--border-color);
+            text-align: center;
+        }
+
+        .login-header {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+
+        .login-icon {
+            width: 85px;
+            height: 85px;
+            background: var(--gradient-pink);
+            border-radius: 28px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3.2em;
+            box-shadow: var(--shadow-lg);
+            border: 5px solid var(--card-bg);
+            color: white;
+            margin-bottom: 15px;
+        }
+
+        .login-header h1 {
+            font-size: 2em;
+            font-weight: 800;
+            background: var(--gradient-pink);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-family: var(--font-heading);
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+            text-align: left;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 0.95em;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 10px;
+        }
+
+        input {
+            width: 100%;
+            padding: 16px 20px;
+            border: 3px solid var(--border-color);
+            border-radius: 18px;
+            font-size: 1em;
+            font-family: var(--font-family);
+            transition: var(--transition);
+            background: var(--light);
+            font-weight: 600;
+        }
+
+        input:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 4px rgba(139, 92, 246, 0.15);
+            background: var(--card-bg);
+        }
+
+        .btn {
+            padding: 18px 30px;
+            border: none;
+            border-radius: 25px;
+            font-size: 1.05em;
+            font-weight: 700;
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            width: 100%;
+            font-family: var(--font-family);
+            box-shadow: var(--shadow-lg);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-top: 10px;
+            background: var(--gradient-pink);
+            color: white;
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+        }
+
+        #errorMessage {
+            color: var(--danger);
+            background: #FFE5E5;
+            border: 2px solid var(--danger);
+            padding: 15px;
+            border-radius: 15px;
+            margin-top: 20px;
+            font-weight: 600;
+            display: none; /* Hidden by default */
+        }
+    </style>
+</head>
+<body>
+
+    <div class="login-card">
+        <div class="login-header">
+            <div class="login-icon">🍄</div>
+            <h1>Welcome Back!</h1>
+        </div>
+        <form id="loginForm">
+            <div class="form-group">
+                <label for="username">👤 Username</label>
+                <input type="text" id="username" placeholder="Enter your username" required>
+            </div>
+            <div class="form-group">
+                <label for="password">🔒 Password</label>
+                <input type="password" id="password" placeholder="Enter your password" required>
+            </div>
+            <button type="submit" class="btn">🚪 Login</button>
+            <div id="errorMessage"></div>
+        </form>
+    </div>
+
+    <script>
+        // =================== APP CONFIGURATION ===================
+        const APP_NAME = 'sales-tracker';
+
+        // =================== FIREBASE CONFIGURATION ===================
+        const firebaseConfig = {
+            apiKey: "AIzaSyDx-OMCr0Af1cdK-hX5dL50S0YIbrbv6TE",
+            authDomain: "sales-tracker-462f0.firebaseapp.com",
+            databaseURL: "https://sales-tracker-462f0-default-rtdb.asia-southeast1.firebasedatabase.app",
+            projectId: "sales-tracker-462f0",
+            storageBucket: "sales-tracker-462f0.firebasestorage.app",
+            messagingSenderId: "1070379275425",
+            appId: "1:1070379275425:web:9642bdf4ca37c6aa850ce0"
+        };
+
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+        const database = firebase.database();
+
+        // Helper function to get app-specific database reference
+        function getRef(path) {
+            return database.ref(APP_NAME + '/' + path);
+        }
+
+        // =================== LOGIN LOGIC ===================
+        const loginForm = document.getElementById('loginForm');
+        const errorMessage = document.getElementById('errorMessage');
+
+        loginForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const username = document.getElementById('username').value.trim();
+            const password = document.getElementById('password').value;
+
+            if (!username || !password) {
+                showError('Please enter both username and password.');
+                return;
+            }
+
+            // Get the user data from Firebase
+            getRef('users/' + username).once('value')
+                .then((snapshot) => {
+                    if (snapshot.exists()) {
+                        const user = snapshot.val();
+                        
+                        // Check if password matches
+                        if (user.password === password) {
+                            
+                            // SUCCESS!
+                            // Store the entire user object in localStorage as a string
+                            localStorage.setItem('session', JSON.stringify(user));
+                            
+                            // Redirect to the dashboard
+                            window.location.href = 'dashboard.html'; 
+
+                        } else {
+                            // Password incorrect
+                            showError('❌ Invalid username or password.');
+                        }
+                    } else {
+                        // User not found
+                        showError('❌ Invalid username or password.');
+                    }
+                })
+                .catch((error) => {
+                    showError('Database error: ' + error.message);
+                });
+        });
+
+        function showError(message) {
+            errorMessage.textContent = message;
+            errorMessage.style.display = 'block';
+        }
+    </script>
+
+</body>
+</html>
